@@ -38,6 +38,14 @@ public class PneumaticsSubsystem extends SubsystemBase {
     doubleSolenoid.toggle();
   }
 
+  public void m_extend() {
+    doubleSolenoid.set(kForward);
+  }
+
+  public void m_contract() {
+    doubleSolenoid.set(kReverse);
+  }
+
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *
