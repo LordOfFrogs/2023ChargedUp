@@ -6,7 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.PneumaticsCommand;
+import frc.robot.commands.PneumaticPistonCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -27,7 +27,7 @@ public class RobotContainer {
   private final PneumaticsSubsystem sub_pneumaticsSubsystem = new PneumaticsSubsystem();
   private final ExampleSubsystem sub_exampleSubsystem = new ExampleSubsystem();
 
-  private final PneumaticsCommand cmd_pneumaticsCommand = new PneumaticsCommand(sub_pneumaticsSubsystem);
+  private final PneumaticPistonCommand cmd_pneumaticsCommand = new PneumaticPistonCommand(sub_pneumaticsSubsystem);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController m_driverController =
@@ -62,8 +62,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(sub_exampleSubsystem);
-  }
+  // public Command getAutonomousCommand() {
+  //   // An example command will be run in autonomous
+  //   return Autos.exampleAuto(sub_exampleSubsystem);
+  // }
 }
