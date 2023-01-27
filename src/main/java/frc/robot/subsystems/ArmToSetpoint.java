@@ -4,14 +4,12 @@
 
 package frc.robot.subsystems;
 
-
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 public class ArmToSetpoint extends SubsystemBase {
 
-   Encoder TestEncoder = new Encoder(8,9);
+   TalonFX testy = new TalonFX(6, "Bobby");
 
     /* Creates a new Pneumatics subsystem */
     public ArmToSetpoint () 
@@ -21,7 +19,7 @@ public class ArmToSetpoint extends SubsystemBase {
 
     public void CheckArm()
     {
-      SmartDashboard.putNumber("Encoder", TestEncoder.get());
+      SmartDashboard.putNumber("Encoder", testy.getSelectedSensorPosition());
     }
 
 
