@@ -4,22 +4,45 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 public class ArmToSetpoint extends SubsystemBase {
 
-   TalonFX testy = new TalonFX(6, "Bobby");
+   TalonFX ArmMotor = new TalonFX(6, "Bobby");
+   public double angle = 0.0;
+   public double EncoderTicks;
 
     /* Creates a new Pneumatics subsystem */
     public ArmToSetpoint () 
     {
-
+      EncoderTicks = ArmMotor.getSensorCollection().getIntegratedSensorPosition();
     }
 
-    public void CheckArm()
+    public void MoveArm (double DesiredAngle)
     {
-      SmartDashboard.putNumber("Encoder", testy.getSelectedSensorPosition());
+      angle += (ArmMotor.getSensorCollection().getIntegratedSensorPosition() - EncoderTicks)/ 248000*360;
+      if(Math.abs(DesiredAngle-angle)>1)
+      {
+        if((DesiredAngle-angle)>0)
+        {
+          ArmMotor.set(TalonFXControlMode.PercentOutput, Constants.RegularConstants.ArmKP);
+        }
+        else
+        {
+          ArmMotor.set(TalonFXControlMode.PercentOutput, -Constants.RegularConstants.ArmKP);
+        }
+        
+      }
+      EncoderTicks = ArmMotor.getSensorCollection().getIntegratedSensorPosition();
+    }
+
+    public void Reset()
+    {
+      angle = 0.0;
+      EncoderTicks = ArmMotor.getSensorCollection().getIntegratedSensorPosition();
     }
 //
 
